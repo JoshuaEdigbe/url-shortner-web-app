@@ -8,6 +8,9 @@ import UrlInput from "./components/UrlInput";
 import UrlShortener from "./utils/url-shortener";
 import { APP_STORAGE_KEY } from "./utils/app-const";
 
+// styles
+import './App.scss'
+
 function App() {
   const shortener = new UrlShortener();
   const [savedUrls, setSavedUrls] = useState<any>([]);
@@ -57,7 +60,7 @@ function App() {
   };
 
   return (
-    <div className="App">
+    <div id="app">
       <UrlInput
         renderButton={(showShortenUrlButton, userInput, handleResetForm) => (
           <SubmitButton
@@ -73,7 +76,6 @@ function App() {
       <ul>
         {savedUrls?.map((savedUrl: any, index: number) => (
           <li key={savedUrl?.id}>
-            {" "}
             {savedUrl.userUrl} {savedUrl?.shortUrl}
           </li>
         ))}
