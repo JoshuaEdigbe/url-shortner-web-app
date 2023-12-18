@@ -1,0 +1,27 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`UrlListItem component matches snapshot 1`] = `
+<div>
+  <li>
+    <div
+      class="urls-container"
+    >
+      <span
+        class="short-url-text"
+      >
+        http://short.est/abcd1234
+      </span>
+      <span
+        class="old-url-text"
+      >
+        http://example.com
+      </span>
+    </div>
+    <button
+      class="delete-btn"
+    >
+      delete
+    </button>
+  </li>
+</div>
+`;

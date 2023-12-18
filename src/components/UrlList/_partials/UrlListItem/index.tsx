@@ -1,21 +1,24 @@
 import React from "react";
+import { UrlItem } from "../../../../types";
 
 interface Props {
-  itemData: {
-    shortUrl: string;
-    userUrl: string;
-    id: string;
-  };
+  itemData: UrlItem;
+  onDelete: (itemData: UrlItem) => void;
 }
 
-const UrlListItem: React.FC<Props> = ({ itemData }) => {
+const UrlListItem: React.FC<Props> = ({ itemData, onDelete }) => {
+  const handleDelete = () => {
+    onDelete(itemData);
+  };
   return (
     <li key={itemData?.id}>
-      <div>
-        <span>{itemData.shortUrl}</span>
-        <span>{itemData.userUrl}</span>
+      <div className="urls-container">
+        <span className="short-url-text">{itemData.shortUrl}</span>
+        <span className="old-url-text">{itemData.userUrl}</span>
       </div>
-      <button>delete</button>
+      <button className="delete-btn" onClick={handleDelete}>
+        delete
+      </button>
     </li>
   );
 };
