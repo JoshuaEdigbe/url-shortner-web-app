@@ -91,7 +91,7 @@ function App() {
   };
 
   const handleSearchTextChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-    setSearchInputValue(e?.target?.value);
+    setSearchInputValue(e?.target?.value?.trim());
   };
 
   return (
