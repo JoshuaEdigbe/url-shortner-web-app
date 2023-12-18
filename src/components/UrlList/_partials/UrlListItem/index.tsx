@@ -6,16 +6,22 @@ interface Props {
     userUrl: string;
     id: string;
   };
+  onDelete: (itemData: any) => void;
 }
 
-const UrlListItem: React.FC<Props> = ({ itemData }) => {
+const UrlListItem: React.FC<Props> = ({ itemData, onDelete }) => {
+  const handleDelete = () => {
+    onDelete(itemData);
+  };
   return (
     <li key={itemData?.id}>
       <div className="urls-container">
         <span className="short-url-text">{itemData.shortUrl}</span>
         <span className="old-url-text">{itemData.userUrl}</span>
       </div>
-      <button className="delete-btn">delete</button>
+      <button className="delete-btn" onClick={handleDelete}>
+        delete
+      </button>
     </li>
   );
 };

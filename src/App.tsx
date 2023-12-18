@@ -34,9 +34,8 @@ function App() {
     );
 
     const upatedURLs = [...existingURLs, urlData];
-    setSavedUrls(upatedURLs);
 
-    localStorage.setItem(APP_STORAGE_KEY, JSON.stringify(upatedURLs));
+    updateUrlsStorage(upatedURLs);
   };
 
   const handleShortenUrl = (userInput: string) => {
@@ -60,6 +59,23 @@ function App() {
     alert(foundUrl?.userUrl || `Sorry, we can't find the original URL :)`);
   };
 
+  const updateUrlsStorage = (upatedURLs: any) => {
+    setSavedUrls(upatedURLs);
+    localStorage.setItem(APP_STORAGE_KEY, JSON.stringify(upatedURLs));
+  };
+
+  const handleDeleteUrl = (urlData: any) => {
+    const existingURLs = JSON.parse(
+      localStorage.getItem(APP_STORAGE_KEY) || "[]"
+    );
+
+    const upatedURLs = existingURLs.filter(
+      (url: any) => !(url?.shortUrl === urlData?.shortUrl)
+    );
+
+    updateUrlsStorage(upatedURLs);
+  };
+
   return (
     <div id="app">
       <UrlInput
@@ -78,11 +94,14 @@ function App() {
       {!!savedUrls?.length && (
         <UrlList.List>
           {savedUrls?.map((savedUrl: any, index: number) => (
-            <UrlList.Item key={savedUrl?.id} itemData={savedUrl} />
+            <UrlList.Item
+              key={savedUrl?.id}
+              itemData={savedUrl}
+              onDelete={handleDeleteUrl}
+            />
           ))}
         </UrlList.List>
       )}
-
     </div>
   );
 }
