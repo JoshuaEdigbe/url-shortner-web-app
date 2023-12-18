@@ -12,11 +12,12 @@ import { UrlList } from "./components/UrlList";
 
 // styles
 import "./App.scss";
+import { UrlItem } from "./types";
 
 function App() {
   const shortener = new UrlShortener();
-  const [savedUrls, setSavedUrls] = useState<any>([]);
-  const [searchedUrls, setSearchedUrls] = useState<any>([]);
+  const [savedUrls, setSavedUrls] = useState<Array<UrlItem>>([]);
+  const [searchedUrls, setSearchedUrls] = useState<Array<UrlItem>>([]);
   const [searchInputValue, setSearchInputValue] = useState("");
 
   // handle set urls to local state
@@ -26,11 +27,12 @@ function App() {
   }, []);
 
   // handle url search
+  // TODO: implement debounding for API calls
   useEffect(() => {
     if (searchInputValue) {
       const searchText = searchInputValue?.toLocaleLowerCase().trim();
       const mutatedSearchList = savedUrls?.filter(
-        (url: any) =>
+        (url: UrlItem) =>
           url?.shortUrl?.toLocaleLowerCase()?.includes(searchText) ||
           url?.userUrl?.toLocaleLowerCase()?.includes(searchText)
       );
@@ -40,11 +42,7 @@ function App() {
     if (!searchInputValue) setSearchedUrls([]);
   }, [searchInputValue, savedUrls]);
 
-  const saveUrlToLocalStore = (urlData: {
-    shortUrl: string;
-    userUrl: string;
-    id: string;
-  }) => {
+  const saveUrlToLocalStore = (urlData: UrlItem) => {
     const existingURLs = getSavedUrlsFromLocalStorage();
 
     const upatedURLs = [...existingURLs, urlData];
@@ -73,16 +71,16 @@ function App() {
     alert(foundUrl?.userUrl || `Sorry, we can't find the original URL :)`);
   };
 
-  const updateUrlsStorage = (upatedURLs: any) => {
+  const updateUrlsStorage = (upatedURLs: Array<UrlItem>) => {
     setSavedUrls(upatedURLs);
     localStorage.setItem(APP_STORAGE_KEY, JSON.stringify(upatedURLs));
   };
 
-  const handleDeleteUrl = (urlData: any) => {
+  const handleDeleteUrl = (urlData: UrlItem) => {
     const existingURLs = getSavedUrlsFromLocalStorage();
 
     const upatedURLs = existingURLs.filter(
-      (url: any) => !(url?.shortUrl === urlData?.shortUrl)
+      (url: UrlItem) => !(url?.shortUrl === urlData?.shortUrl)
     );
 
     updateUrlsStorage(upatedURLs);
@@ -92,7 +90,7 @@ function App() {
     return JSON.parse(localStorage.getItem(APP_STORAGE_KEY) || "[]");
   };
 
-  const handleSearchTextChange = (e: any) => {
+  const handleSearchTextChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     setSearchInputValue(e?.target?.value);
   };
 
@@ -115,7 +113,7 @@ function App() {
       {/* Render List Without Search Data */}
       {!!savedUrls?.length && !searchedUrls?.length && (
         <UrlList.List>
-          {savedUrls?.map((savedUrl: any, index: number) => (
+          {savedUrls?.map((savedUrl: UrlItem, index: number) => (
             <UrlList.Item
               key={savedUrl?.id}
               itemData={savedUrl}
@@ -128,7 +126,7 @@ function App() {
       {/* Render List With Search Data */}
       {!!searchedUrls?.length && (
         <UrlList.List>
-          {searchedUrls?.map((savedUrl: any, index: number) => (
+          {searchedUrls?.map((savedUrl: UrlItem, index: number) => (
             <UrlList.Item
               key={savedUrl?.id}
               itemData={savedUrl}

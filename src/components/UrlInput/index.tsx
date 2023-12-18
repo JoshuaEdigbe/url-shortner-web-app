@@ -26,7 +26,7 @@ const UrlInput: React.FC<Props> = ({ renderButton }) => {
     }
   }, [userUrlInputValue]);
 
-  const handleInputChange = (e: any) => {
+  const handleInputChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     setUserUrlInputValue(e?.target?.value);
   };
 

@@ -1,12 +1,9 @@
 import React from "react";
+import { UrlItem } from "../../../../types";
 
 interface Props {
-  itemData: {
-    shortUrl: string;
-    userUrl: string;
-    id: string;
-  };
-  onDelete: (itemData: any) => void;
+  itemData: UrlItem;
+  onDelete: (itemData: UrlItem) => void;
 }
 
 const UrlListItem: React.FC<Props> = ({ itemData, onDelete }) => {
