@@ -1,5 +1,8 @@
 import React from "react";
 
+// styles
+import "./index.scss";
+
 interface Props {
   showShortenUrlButton: boolean;
   handleShortenUrl: () => void;
@@ -13,11 +16,15 @@ const SubmitButton: React.FC<Props> = ({
   return (
     <>
       {showShortenUrlButton && (
-        <button onClick={handleShortenUrl}>Shorten URL</button>
+        <button onClick={handleShortenUrl} className="submit-button">
+          Shorten URL
+        </button>
       )}
 
       {!showShortenUrlButton && (
-        <button onClick={handleShowOriginalUrl}>Show Original URL</button>
+        <button onClick={handleShowOriginalUrl} className="submit-button">
+          Show Original URL
+        </button>
       )}
     </>
   );
