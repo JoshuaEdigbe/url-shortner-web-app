@@ -7,9 +7,10 @@ import UrlInput from "./components/UrlInput";
 // utlils
 import UrlShortener from "./utils/url-shortener";
 import { APP_STORAGE_KEY } from "./utils/app-const";
+import { UrlList } from "./components/UrlList";
 
 // styles
-import './App.scss'
+import "./App.scss";
 
 function App() {
   const shortener = new UrlShortener();
@@ -73,13 +74,15 @@ function App() {
           />
         )}
       />
-      <ul>
-        {savedUrls?.map((savedUrl: any, index: number) => (
-          <li key={savedUrl?.id}>
-            {savedUrl.userUrl} {savedUrl?.shortUrl}
-          </li>
-        ))}
-      </ul>
+
+      {!!savedUrls?.length && (
+        <UrlList.List>
+          {savedUrls?.map((savedUrl: any, index: number) => (
+            <UrlList.Item key={savedUrl?.id} itemData={savedUrl} />
+          ))}
+        </UrlList.List>
+      )}
+
     </div>
   );
 }
