@@ -1,0 +1,11 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`UrlList component matches snapshot 1`] = `
+<div>
+  <ul
+    id="url-list-container"
+  >
+    Test children
+  </ul>
+</div>
+`;
