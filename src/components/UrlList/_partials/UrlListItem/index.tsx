@@ -11,11 +11,11 @@ interface Props {
 const UrlListItem: React.FC<Props> = ({ itemData }) => {
   return (
     <li key={itemData?.id}>
-      <div>
-        <span>{itemData.shortUrl}</span>
-        <span>{itemData.userUrl}</span>
+      <div className="urls-container">
+        <span className="short-url-text">{itemData.shortUrl}</span>
+        <span className="old-url-text">{itemData.userUrl}</span>
       </div>
-      <button>delete</button>
+      <button className="delete-btn">delete</button>
     </li>
   );
 };
