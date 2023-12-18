@@ -1,6 +1,10 @@
 import React, { useEffect, useState } from "react";
 
+// utils
 import { SHORTENER_BASE_URL } from "../../utils/app-const";
+
+// style
+import './index.scss'
 
 interface Props {
   renderButton?: (
@@ -31,12 +35,12 @@ const UrlInput: React.FC<Props> = ({ renderButton }) => {
   };
 
   return (
-    <section>
+    <section id="form-container">
       <input
         type="url"
         placeholder="Enter URL"
         name=""
-        id=""
+        className="url-input"
         value={userUrlInputValue}
         onChange={handleInputChange}
       />
